@@ -80,7 +80,7 @@ func deleteOneMovie(movieId string) {
 //delete all records from monogdb
 
 func deleteAllMovie() {
-	deleteResult, err := collection.DeleteMany(context.Background(), bson.M{{}}, nil)
+	deleteResult, err := collection.DeleteMany(context.Background(), bson.D{{}}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
