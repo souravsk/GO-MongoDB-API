@@ -13,7 +13,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/x/mongo/driver/mongocrypt/options"
 )
 
 // variable for connect form the MongoDB
@@ -49,7 +48,7 @@ func init() {
 
 //insert 1 record
 
-func insertOneMovie(movie model.Netflix) { //model is from pacakge model and Netfile is what we create in model file as struct or classs
+func insertOneMovie(movie model.Nitflix) { //model is from pacakge model and Netfile is what we create in model file as struct or classs
 	inserted, err := collection.InsertOne(context.Background(), movie)
 	if err != nil {
 		log.Fatal(err)
@@ -128,7 +127,7 @@ func CreateMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Allow-Control-Allow-Methods", "POST")
 
 	var movie model.Nitflix
-	_ := json.NewDecoder(r.Body).Decode(&movie)
+	json.NewDecoder(r.Body).Decode(&movie)
 	insertOneMovie(movie)
 	json.NewEncoder(w).Encode(movie)
 }

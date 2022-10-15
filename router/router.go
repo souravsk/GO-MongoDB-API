@@ -5,7 +5,7 @@ import (
 	"github.com/souravsk/GO-MongoDB-API/controller"
 )
 
-func Router() *mux.Route {
+func Router() *mux.Router {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/api/movies", controller.GetMyAllMovies).Methods("GET")
