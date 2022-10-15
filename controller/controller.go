@@ -82,12 +82,13 @@ func deleteOneMovie(movieId string) {
 
 //delete all records from monogdb
 
-func deleteAllMovie() {
+func deleteAllMovie() int64 {
 	deleteResult, err := collection.DeleteMany(context.Background(), bson.D{{}}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println("Number of movie deletd is ", deleteResult.DeletedCount)
+	return deleteResult.DeletedCount
 }
 
 //get all the movies
@@ -160,6 +161,6 @@ func DeleteAllMovies(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content_type", "application/x-www-form-urlencode")
 	w.Header().Set("Allow-Control-Allow-Methods", "DELETE")
 
-	count := deleteAllMovie()
-	json.NewEncoder(w).Encode(count)
+	countMovie := deleteAllMovie()
+	json.NewEncoder(w).Encode(countMovie)
 }
