@@ -1,10 +1,21 @@
-$ docker ps
-CONTAINER ID   IMAGE                COMMAND                  CREATED        STATUS              PORTS                                           NAMES
-0c6eb49b794f   go-mongodb-api_api   "./main"                 21 hours ago   Up About a minute   0.0.0.0:4000->4000/tcp, :::4000->4000/tcp       go-mongodb-api_api_1
-1c5a0a1572ba   mongo:latest         "docker-entrypoint.s…"   21 hours ago   Up About a minute   0.0.0.0:27017->27017/tcp, :::27017->27017/tcp   go-mongodb-api_mongo_1
-@souravsk ➜ /workspaces/GO-MongoDB-API (main) $ docker exec 0c6eb49b794f mongo
-OCI runtime exec failed: exec failed: unable to start container process: exec: "mongo": executable file not found in $PATH: unknown
-@souravsk ➜ /workspaces/GO-MongoDB-API (main) $ docker exec 1c5a0a1572ba mongo
-OCI runtime exec failed: exec failed: unable to start container process: exec: "mongo": executable file not found in $PATH: unknown
-@souravsk ➜ /workspaces/GO-MongoDB-API (main) $ docker exec -it  mongo:latest mongo
-Error response from daemon: No such container: mongo:latest
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+    networks:
+      - mynetwork
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      -  mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
