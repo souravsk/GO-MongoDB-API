@@ -15,8 +15,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// variable for connect form the MongoDB
-const connectionString = "mongodb+srv://test-db:test@cluster0.wv5caal.mongodb.net/?retryWrites=true&w=majority"
+// variable for connect form the MongoDB Atlas
+//const connectionString = "mongodb+srv://test-db:test@cluster0.wv5caal.mongodb.net/?retryWrites=true&w=majority"
+
+// variabel for connect form the MongoDB docker image or local system.
+const connectionString = "mongodb://localhost:27017/netflix"
 const dbName = "netflix"
 const colName = "watchlist"
 
