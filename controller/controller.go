@@ -19,7 +19,7 @@ import (
 //const connectionString = "mongodb+srv://test-db:test@cluster0.wv5caal.mongodb.net/?retryWrites=true&w=majority"
 
 // variabel for connect form the MongoDB docker image or local system.
-const connectionString = "mongodb://localhost:27017/netflix"
+const connectionString = "mongodb://mongo:27017/netflix"
 const dbName = "netflix"
 const colName = "watchlist"
 
