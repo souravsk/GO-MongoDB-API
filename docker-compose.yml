@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  db:
+    image: mongo:4.0.4
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/db:/data/db
+    networks: 
+      - apinet
+    env_file:
+      .env
+  api:
+    build: . 
+    ports:
+      - 4000:4000
+    volumes:
+      - ./src:/src/
+    networks:
+      - apinet
+    env_file:
+      .env
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5050"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+      
+networks:
+  apinet:
+
